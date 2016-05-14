@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    @CacheEvict(value = "usercache", key = "#user.id",allEntries = true, beforeInvocation=true)
+    @CacheEvict(value = "usercache", key = "#user.userId",beforeInvocation=true)
     public boolean modifyUser(User user) {
         if (user == null || StringUtils.isEmpty(user.getUserId())) {
             return false;
