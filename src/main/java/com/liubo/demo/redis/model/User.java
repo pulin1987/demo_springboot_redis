@@ -6,11 +6,20 @@ import java.io.Serializable;
  * Created by Administrator on 2016/5/13.
  */
 public class User implements Serializable {
+    private Integer id;
     private String userId;
     private String name;
     private Integer age;
     private String address;
     private Integer isdeleted;//
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getUserId() {
         return userId;

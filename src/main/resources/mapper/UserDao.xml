@@ -3,39 +3,37 @@
 <mapper namespace="com.liubo.demo.redis.dao.UserDao">
 
     <select id="getUser" parameterType="com.liubo.demo.redis.model.User" resultType="com.liubo.demo.redis.model.User">
-      SELECT
-      id,
-	 userId,
-	userId,
-	`name`,
-	age,
-	address,
-	isdeleted
-FROM
-	user
-<where>
-    isdeleted=0
-    <if test="userId!=null and userId !=''">
-       and  userId=#{userId}
-    </if>
-    <if test="name!=null and name !=''">
-        and  name=#{name}
-    </if>
-    <if test="age !=null">
-        and age=#{age}
-    </if>
-    <if test="address !=null and address!=''">
-        and address like concat('%',#{address},'%')
-    </if>
+        SELECT
+        id,
+        userId,
+        `name`,
+        age,
+        address,
+        isdeleted
+        FROM
+        user
+        <where>
+            isdeleted=0
+            <if test="userId!=null and userId !=''">
+                and userId=#{userId}
+            </if>
+            <if test="name!=null and name !=''">
+                and name=#{name}
+            </if>
+            <if test="age !=null">
+                and age=#{age}
+            </if>
+            <if test="address !=null and address!=''">
+                and address like concat('%',#{address},'%')
+            </if>
 
-</where>
+        </where>
 
     </select>
 
     <select id="getUserById" resultType="com.liubo.demo.redis.model.User">
       SELECT
       id,
-	 userId,
 	userId,
 	`name`,
 	age,
@@ -46,5 +44,23 @@ FROM
 WHERE
 userId=#{userId}
     </select>
+
+    <update id="updateUser" parameterType="com.liubo.demo.redis.model.User">
+        UPDATE user
+        <set>
+            <if test="name!=null and name !=''">
+                name=#{name},
+            </if>
+            <if test="age !=null">
+                age=#{age},
+            </if>
+            <if test="address !=null and address!=''">
+                address=#{address}
+            </if>
+
+        </set>
+        WHERE userId=#{userId}
+        and isdeleted=0
+    </update>
 
 </mapper>
